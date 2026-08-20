@@ -1,0 +1,42 @@
+{
+  "name": "ms-energy-project",
+  "version": "1.0.0",
+  "dependencies": {
+    "@sap/cds": "^9"
+  },
+  "devDependencies": {
+    "@cap-js/sqlite": "^2",
+    "concurrently": "^8",
+    "cds-plugin-ui5": "^0.13.0"
+  },
+  "scripts": {
+    "start": "cds-serve",
+    "watch": "cds watch",
+    "dev": "npm run watch-energy-project",
+    "watch-energy-project": "cds watch --open energyproject/index.html?sap-ui-xx-viewCache=false --livereload false"
+  },
+  "cds": {
+    "requires": {
+      "db": {
+        "kind": "sqlite",
+        "credentials": {
+          "url": ":memory:"
+        }
+      }
+    },
+    "watch": {
+      "ignore": [
+        "**/*.log",
+        "**/package-lock.json",
+        "**/.cds-services.json"
+      ]
+    }
+  },
+  "private": true,
+  "workspaces": [
+    "app/*"
+  ],
+  "sapux": [
+    "app/energy-project"
+  ]
+}
