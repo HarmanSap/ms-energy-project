@@ -9,6 +9,27 @@ annotate service.EnergyProjects with @(
     ]
 );
 
+// ── Enable creation in sub-tables + side effect: phase added → refresh DCEP dropdown ──
+
+annotate service.EnergyProjects with @(
+    Capabilities.NavigationRestrictions: {
+        RestrictedProperties: [
+            {
+                NavigationProperty: phases,
+                InsertRestrictions: { Insertable: true }
+            },
+            {
+                NavigationProperty: dcepProjects,
+                InsertRestrictions: { Insertable: true }
+            }
+        ]
+    },
+    Common.SideEffects #PhasesChanged: {
+        SourceEntities: [{ $NavigationPropertyPath: 'phases' }],
+        TargetEntities: [{ $NavigationPropertyPath: 'dcepProjects' }]
+    }
+);
+
 // ── Object Page ───────────────────────────────────────────────────────────────
 
 annotate service.EnergyProjects with @(
@@ -55,7 +76,6 @@ annotate service.EnergyProjects with @(
 
 annotate service.Phases with @(
     UI.LineItem: [
-        { $Type: 'UI.DataField', Value: ID,   Label: 'Phase ID'   },
         { $Type: 'UI.DataField', Value: name, Label: 'Phase Name' }
     ]
 );
@@ -71,11 +91,9 @@ annotate service.DCEPProjects with @(
 );
 
 annotate service.DCEPProjects with {
-    phase    @(
-        Common.Text           : phase.name,
-        Common.TextArrangement: #TextOnly
-    );
     phase_ID @(
+        Common.Text                    : phase.name,
+        Common.TextArrangement         : #TextOnly,
         Common.ValueListWithFixedValues: true,
         Common.ValueList               : {
             $Type         : 'Common.ValueListType',

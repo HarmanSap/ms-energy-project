@@ -127,7 +127,8 @@
           "options": {
             "settings": {
               "editableHeaderContent": false,
-              "contextPath": "/EnergyProjects"
+              "contextPath": "/EnergyProjects",
+              "editMode": "Editable"
             }
           }
         }
