@@ -80,6 +80,15 @@ annotate service.Phases with @(
     ]
 );
 
+// Show the Phase name (never the UUID) wherever the key is rendered — including
+// the DCEP Phase value-list dropdown items.
+annotate service.Phases with {
+    ID @(
+        Common.Text           : name,
+        Common.TextArrangement: #TextOnly
+    );
+};
+
 // ── DCEP Projects table with Phase dropdown ───────────────────────────────────
 
 annotate service.DCEPProjects with @(
