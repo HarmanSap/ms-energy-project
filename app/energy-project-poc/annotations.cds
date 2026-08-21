@@ -73,6 +73,20 @@ annotate service.EnergyProjects with @(
                     Target: 'dcepProjects/@UI.LineItem'
                 }
             ]
+        },
+        // same DCEP table again, in its own section
+        {
+            $Type : 'UI.CollectionFacet',
+            ID    : 'DCEPTab',
+            Label : 'DCEP Projects',
+            Facets: [
+                {
+                    $Type : 'UI.ReferenceFacet',
+                    ID    : 'DCEPSection2',
+                    Label : 'DCEP Projects',
+                    Target: 'dcepProjects/@UI.LineItem#Copy'
+                }
+            ]
         }
     ],
     UI.FieldGroup#Placeholder: {
@@ -98,6 +112,12 @@ annotate service.Phases with {
 // DCEP table with the phase dropdown
 annotate service.DCEPProjects with @(
     UI.LineItem: [
+        { $Type: 'UI.DataField', Value: name,     Label: 'Project Name' },
+        { $Type: 'UI.DataField', Value: type,     Label: 'Type'         },
+        { $Type: 'UI.DataField', Value: phase_ID, Label: 'Phase'        }
+    ],
+    // same columns, second qualifier so the 2nd section gets its own table id
+    UI.LineItem #Copy: [
         { $Type: 'UI.DataField', Value: name,     Label: 'Project Name' },
         { $Type: 'UI.DataField', Value: type,     Label: 'Type'         },
         { $Type: 'UI.DataField', Value: phase_ID, Label: 'Phase'        }

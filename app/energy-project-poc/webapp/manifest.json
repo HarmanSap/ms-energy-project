@@ -153,6 +153,12 @@
                     "enableExport": false,
                     "enablePaste": false
                   }
+                },
+                "dcepProjects/@com.sap.vocabularies.UI.v1.LineItem#Copy": {
+                  "tableSettings": {
+                    "enableExport": false,
+                    "enablePaste": false
+                  }
                 }
               }
             }
