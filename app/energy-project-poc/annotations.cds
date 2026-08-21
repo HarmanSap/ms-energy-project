@@ -9,14 +9,14 @@ annotate service.EnergyProjects with @(
     ]
 );
 
-// ── Enable creation in sub-tables ───────────────────────────────────────────────
+// ── DCEP Projects table: read/update only (no create) ───────────────────────────
 
 annotate service.EnergyProjects with @(
     Capabilities.NavigationRestrictions: {
         RestrictedProperties: [
             {
                 NavigationProperty: dcepProjects,
-                InsertRestrictions: { Insertable: true }
+                InsertRestrictions: { Insertable: false }
             }
         ]
     }
@@ -55,6 +55,20 @@ annotate service.EnergyProjects with @(
                     ID    : 'PhasesSection',
                     Label : 'Phases',
                     Target: 'activePhases/@UI.LineItem'
+                }
+            ]
+        },
+        // Tab 2 — Project & Location Details (now also holds the DCEP Projects table)
+        {
+            $Type : 'UI.CollectionFacet',
+            ID    : 'ProjectDetailsTab',
+            Label : 'Project & Location Details',
+            Facets: [
+                {
+                    $Type : 'UI.ReferenceFacet',
+                    ID    : 'ProjectDetailsSection',
+                    Label : 'Project & Location Details',
+                    Target: '@UI.FieldGroup#Placeholder'
                 },
                 {
                     $Type : 'UI.ReferenceFacet',
@@ -63,13 +77,6 @@ annotate service.EnergyProjects with @(
                     Target: 'dcepProjects/@UI.LineItem'
                 }
             ]
-        },
-        // Tab 2 — placeholder
-        {
-            $Type : 'UI.ReferenceFacet',
-            ID    : 'ProjectDetailsTab',
-            Label : 'Project & Location Details',
-            Target: '@UI.FieldGroup#Placeholder'
         }
     ],
     UI.FieldGroup#Placeholder: {

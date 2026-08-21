@@ -136,7 +136,15 @@
           "options": {
             "settings": {
               "editableHeaderContent": false,
-              "contextPath": "/EnergyProjects"
+              "contextPath": "/EnergyProjects",
+              "controlConfiguration": {
+                "dcepProjects/@com.sap.vocabularies.UI.v1.LineItem": {
+                  "tableSettings": {
+                    "enableExport": false,
+                    "enablePaste": false
+                  }
+                }
+              }
             }
           }
         }
