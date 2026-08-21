@@ -1,7 +1,6 @@
 using EnergyServicePOC as service from '../../srv/energy-poc-service';
 
-// ── List Report ───────────────────────────────────────────────────────────────
-
+// list report
 annotate service.EnergyProjects with @(
     UI.SelectionFields: [],
     UI.LineItem: [
@@ -9,8 +8,7 @@ annotate service.EnergyProjects with @(
     ]
 );
 
-// ── DCEP Projects table: read/update only (no create) ───────────────────────────
-
+// DCEP table is read/update only, no create
 annotate service.EnergyProjects with @(
     Capabilities.NavigationRestrictions: {
         RestrictedProperties: [
@@ -22,8 +20,7 @@ annotate service.EnergyProjects with @(
     }
 );
 
-// ── "Add Phase" action → creates an ACTIVE phase, then refreshes the tables ──────
-
+// "Add Phase" action - adds an active phase, then refreshes the tables
 annotate service.EnergyProjects with actions {
     addPhase @(
         Common.SideEffects #AddPhase: {
@@ -32,8 +29,7 @@ annotate service.EnergyProjects with actions {
     );
 };
 
-// ── Object Page ───────────────────────────────────────────────────────────────
-
+// object page
 annotate service.EnergyProjects with @(
     UI.HeaderInfo: {
         TypeName      : 'Energy Project',
@@ -44,7 +40,7 @@ annotate service.EnergyProjects with @(
         { $Type: 'UI.DataFieldForAction', Action: 'EnergyServicePOC.addPhase', Label: 'Add Phase' }
     ],
     UI.Facets: [
-        // Tab 1 — Phases (default)
+        // phases tab (default)
         {
             $Type : 'UI.CollectionFacet',
             ID    : 'PhasesTab',
@@ -58,7 +54,7 @@ annotate service.EnergyProjects with @(
                 }
             ]
         },
-        // Tab 2 — Project & Location Details (now also holds the DCEP Projects table)
+        // project & location details tab (DCEP table lives here now)
         {
             $Type : 'UI.CollectionFacet',
             ID    : 'ProjectDetailsTab',
@@ -84,16 +80,14 @@ annotate service.EnergyProjects with @(
     }
 );
 
-// ── Phases table ──────────────────────────────────────────────────────────────
-
+// phases table
 annotate service.Phases with @(
     UI.LineItem: [
         { $Type: 'UI.DataField', Value: name, Label: 'Phase Name' }
     ]
 );
 
-// Show the Phase name (never the UUID) wherever the key is rendered — including
-// the DCEP Phase value-list dropdown items.
+// show the phase name instead of the id (also used in the DCEP dropdown)
 annotate service.Phases with {
     ID @(
         Common.Text           : name,
@@ -101,8 +95,7 @@ annotate service.Phases with {
     );
 };
 
-// ── DCEP Projects table with Phase dropdown ───────────────────────────────────
-
+// DCEP table with the phase dropdown
 annotate service.DCEPProjects with @(
     UI.LineItem: [
         { $Type: 'UI.DataField', Value: name,     Label: 'Project Name' },

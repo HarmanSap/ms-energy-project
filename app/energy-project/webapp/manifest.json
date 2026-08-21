@@ -128,7 +128,14 @@
             "settings": {
               "editableHeaderContent": false,
               "contextPath": "/EnergyProjects",
-              "editMode": "Editable"
+              "editMode": "Editable",
+              "controlConfiguration": {
+                "dcepProjects/@com.sap.vocabularies.UI.v1.LineItem": {
+                  "tableSettings": {
+                    "enablePaste": false
+                  }
+                }
+              }
             }
           }
         }

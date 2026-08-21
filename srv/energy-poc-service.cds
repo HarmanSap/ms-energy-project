@@ -1,15 +1,14 @@
 using ms.energy as my from '../db/schema';
 
-// POC variant of the service — same data, plus an action that creates an
-// ACTIVE Phase immediately (outside the draft) so it shows in the dropdown
-// without a full page Save. App #1 (EnergyService) is untouched.
+// POC version of the service. Same data, but with an addPhase action that
+// creates an active phase right away so it shows up in the dropdown without
+// saving the whole page.
 //
-// The `phases` composition is EXCLUDED from this draft-enabled projection on
-// purpose: a draft owns its compositions and rewrites them on Save, which would
-// delete any phase added mid-edit. By exposing phases only through the
-// `activePhases` association (read) + the addPhase action (write), an added
-// phase is never part of the draft, so it survives Save in BOTH display and
-// edit mode. dcepProjects stays a composition (edited inside the draft).
+// We exclude the phases composition on purpose: a draft owns its compositions
+// and rewrites them on save, which would wipe out a phase added mid-edit.
+// Instead phases are read through the activePhases association and written via
+// addPhase, so they aren't part of the draft and survive save. dcepProjects
+// stays a composition (still edited in the draft).
 service EnergyServicePOC @(path: '/odata/v4/energy-poc') {
 
     @odata.draft.enabled

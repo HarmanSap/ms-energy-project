@@ -1,13 +1,13 @@
 const cds = require('@sap/cds');
 
-// Handler for EnergyServicePOC (auto-loaded by CAP via matching file name).
-// addPhase inserts an ACTIVE Phase linked to the current project, committed
-// immediately — so it is visible to the phase_ID value list right away.
+// Handler for EnergyServicePOC (CAP picks it up by matching file name).
+// addPhase adds an active phase for the current project so it shows up in the
+// phase_ID dropdown right away.
 module.exports = class EnergyServicePOC extends cds.ApplicationService {
     init() {
-        // FE calls the action on the DRAFT instance while editing, so register
-        // for both the active entity and its draft shadow. Either way we insert
-        // an ACTIVE Phase (the draft shares the active project's ID).
+        // FE calls this on the draft while editing, so handle both the active
+        // entity and the draft. Either way we insert an active phase (the draft
+        // uses the same project ID).
         const addPhase = async (req) => {
             const projectID = req.params[req.params.length - 1]?.ID;
             await INSERT.into('ms.energy.Phase').entries({

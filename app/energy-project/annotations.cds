@@ -1,7 +1,6 @@
 using EnergyService as service from '../../srv/service';
 
-// ── List Report ───────────────────────────────────────────────────────────────
-
+// list report
 annotate service.EnergyProjects with @(
     UI.SelectionFields: [],
     UI.LineItem: [
@@ -9,8 +8,7 @@ annotate service.EnergyProjects with @(
     ]
 );
 
-// ── Enable creation in sub-tables + side effect: phase added → refresh DCEP dropdown ──
-
+// let users add rows to the sub-tables; refresh DCEP when a phase is added
 annotate service.EnergyProjects with @(
     Capabilities.NavigationRestrictions: {
         RestrictedProperties: [
@@ -30,8 +28,7 @@ annotate service.EnergyProjects with @(
     }
 );
 
-// ── Object Page ───────────────────────────────────────────────────────────────
-
+// object page
 annotate service.EnergyProjects with @(
     UI.HeaderInfo: {
         TypeName      : 'Energy Project',
@@ -39,7 +36,7 @@ annotate service.EnergyProjects with @(
         Title         : { Value: name }
     },
     UI.Facets: [
-        // Tab 1 — Phases (default)
+        // phases tab (default)
         {
             $Type : 'UI.CollectionFacet',
             ID    : 'PhasesTab',
@@ -48,8 +45,22 @@ annotate service.EnergyProjects with @(
                 {
                     $Type : 'UI.ReferenceFacet',
                     ID    : 'PhasesSection',
-                    Label : 'Phases',
+                    Label : 'Phases(Inline)',
                     Target: 'phases/@UI.LineItem'
+                }
+            ]
+        },
+        // project & location details tab (DCEP table lives here now)
+        {
+            $Type : 'UI.CollectionFacet',
+            ID    : 'ProjectDetailsTab',
+            Label : 'Project & Location Details',
+            Facets: [
+                {
+                    $Type : 'UI.ReferenceFacet',
+                    ID    : 'ProjectDetailsSection',
+                    Label : 'Project & Location Details',
+                    Target: '@UI.FieldGroup#Placeholder'
                 },
                 {
                     $Type : 'UI.ReferenceFacet',
@@ -58,13 +69,6 @@ annotate service.EnergyProjects with @(
                     Target: 'dcepProjects/@UI.LineItem'
                 }
             ]
-        },
-        // Tab 2 — placeholder
-        {
-            $Type : 'UI.ReferenceFacet',
-            ID    : 'ProjectDetailsTab',
-            Label : 'Project & Location Details',
-            Target: '@UI.FieldGroup#Placeholder'
         }
     ],
     UI.FieldGroup#Placeholder: {
@@ -72,16 +76,14 @@ annotate service.EnergyProjects with @(
     }
 );
 
-// ── Phases table ──────────────────────────────────────────────────────────────
-
+// phases table
 annotate service.Phases with @(
     UI.LineItem: [
         { $Type: 'UI.DataField', Value: name, Label: 'Phase Name' }
     ]
 );
 
-// Show the Phase name (never the UUID) wherever the key is rendered — including
-// the DCEP Phase value-list dropdown items.
+// show the phase name instead of the id (also used in the DCEP dropdown)
 annotate service.Phases with {
     ID @(
         Common.Text           : name,
@@ -89,8 +91,7 @@ annotate service.Phases with {
     );
 };
 
-// ── DCEP Projects table with Phase dropdown ───────────────────────────────────
-
+// DCEP table with the phase dropdown
 annotate service.DCEPProjects with @(
     UI.LineItem: [
         { $Type: 'UI.DataField', Value: name,     Label: 'Project Name' },

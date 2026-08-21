@@ -3,15 +3,12 @@ sap.ui.define([
 ], function (ControllerExtension) {
     "use strict";
 
-    // POC-only Object Page extension: after Save, re-enter Edit so the page
-    // stays editable (matches the customer app). Phases are added through the
-    // standard Fiori Elements Create button on the draft-enabled Phases table.
+    // POC-only: after Save, go back into edit mode so the page stays editable.
     return ControllerExtension.extend("energyprojectpoc.ext.ObjectPageExt", {
 
         override: {
             editFlow: {
-                // After Save the page is back on the active document — re-enter edit
-                // so the app stays editable (matches the customer app).
+                // Save drops us back on the active doc, so re-open it for editing.
                 onAfterSave: function (mParameters) {
                     var oContext = mParameters && mParameters.context;
                     if (oContext) {
