@@ -138,6 +138,16 @@
               "editableHeaderContent": false,
               "contextPath": "/EnergyProjects",
               "controlConfiguration": {
+                "activePhases/@com.sap.vocabularies.UI.v1.LineItem": {
+                  "actions": {
+                    "addPhaseToolbar": {
+                      "press": "energyprojectpoc.ext.AddPhaseHandler.onAddPhase",
+                      "text": "Add Phase",
+                      "enabled": true,
+                      "requiresSelection": false
+                    }
+                  }
+                },
                 "dcepProjects/@com.sap.vocabularies.UI.v1.LineItem": {
                   "tableSettings": {
                     "enableExport": false,
