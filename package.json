@@ -11,9 +11,7 @@
   },
   "scripts": {
     "start": "cds-serve",
-    "watch": "cds watch",
-    "dev": "npm run watch-energy-project",
-    "watch-energy-project": "cds watch --open energyproject/index.html?sap-ui-xx-viewCache=false --livereload false"
+    "watch": "cds watch"
   },
   "cds": {
     "requires": {
@@ -37,6 +35,7 @@
     "app/*"
   ],
   "sapux": [
-    "app/energy-project"
+    "app/energy-project-poc",
+    "app/project-list-search"
   ]
 }

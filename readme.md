@@ -1,22 +1,20 @@
-# Getting Started
+# MS Energy Project – POC
 
-Welcome to your new CAP project.
+CAP + Fiori Elements V4 proof of concept for Microsoft.
 
-It contains these folders and files, following our recommended project layout:
+## Apps
 
-File or Folder | Purpose
----------|----------
-`app/` | content for UI frontends goes here
-`db/` | your domain models and data go here
-`srv/` | your service models and code go here
-`readme.md` | this getting started guide
+**energy-project-poc** – the main demo  
+Energy project with a Phases tab. Add a phase and it shows up in the DCEP dropdown straight away — no save needed.
 
-## Next Steps
+**project-list-search** – DCEP projects list  - WIP. 
+Simple list of DCEP projects with live filters.
 
-- Open a new terminal and run `cds watch`
-- (in VS Code simply choose _**Terminal** > Run Task > cds watch_)
-- Start with your domain model, in a CDS file in `db/`
+## Run
+npm run watch
 
-## Learn More
+- POC app: http://localhost:4004/energy-project-poc/webapp/index.html
 
-Learn more at <https://cap.cloud.sap>.
+## Notes
+- SQLite in-memory — data resets on every restart
+- Phases added in the POC app also appear in the list search phase filter

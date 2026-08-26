@@ -20,7 +20,7 @@ annotate service.EnergyProjects with @(
     }
 );
 
-// "Add Phase" action - adds an active phase, then refreshes the tables
+// "Add Phase" action — refreshes phases and DCEP projects after insert
 annotate service.EnergyProjects with actions {
     addPhase @(
         Common.SideEffects #AddPhase: {

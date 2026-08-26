@@ -1,7 +1,7 @@
 {
   "_version": "1.76.0",
   "sap.app": {
-    "id": "energyproject",
+    "id": "projectlistsearch",
     "type": "application",
     "i18n": "i18n/i18n.properties",
     "applicationVersion": {
@@ -9,15 +9,9 @@
     },
     "title": "{{appTitle}}",
     "description": "{{appDescription}}",
-    "resources": "resources.json",
-    "sourceTemplate": {
-      "id": "@sap/generator-fiori:lrop",
-      "version": "1.19.0",
-      "toolsId": "f81d7db7-cd7c-4dc0-a75f-7b1543dfae49"
-    },
     "dataSources": {
       "mainService": {
-        "uri": "/odata/v4/energy/",
+        "uri": "/odata/v4/dcep-list/",
         "type": "OData",
         "settings": {
           "annotations": [],
@@ -28,14 +22,6 @@
   },
   "sap.ui": {
     "technology": "UI5",
-    "icons": {
-      "icon": "",
-      "favIcon": "",
-      "phone": "",
-      "phone@2": "",
-      "tablet": "",
-      "tablet@2": ""
-    },
     "deviceTypes": {
       "desktop": true,
       "tablet": true,
@@ -60,7 +46,7 @@
       "i18n": {
         "type": "sap.ui.model.resource.ResourceModel",
         "settings": {
-          "bundleName": "energyproject.i18n.i18n"
+          "bundleName": "projectlistsearch.i18n.i18n"
         }
       },
       "": {
@@ -77,62 +63,30 @@
         "uri": "i18n/i18n.properties"
       }
     },
-    "resources": {
-      "css": []
-    },
     "routing": {
       "config": {},
       "routes": [
         {
           "pattern": ":?query:",
-          "name": "EnergyProjectsList",
-          "target": "EnergyProjectsList"
-        },
-        {
-          "pattern": "EnergyProjects({key}):?query:",
-          "name": "EnergyProjectsObjectPage",
-          "target": "EnergyProjectsObjectPage"
+          "name": "DCEPProjectsList",
+          "target": "DCEPProjectsList"
         }
       ],
       "targets": {
-        "EnergyProjectsList": {
+        "DCEPProjectsList": {
           "type": "Component",
-          "id": "EnergyProjectsList",
+          "id": "DCEPProjectsList",
           "name": "sap.fe.templates.ListReport",
           "options": {
             "settings": {
-              "contextPath": "/EnergyProjects",
+              "contextPath": "/DCEPProjects",
               "variantManagement": "Page",
-              "navigation": {
-                "EnergyProjects": {
-                  "detail": {
-                    "route": "EnergyProjectsObjectPage"
-                  }
-                }
-              },
+              "initialLoad": "Enabled",
+              "liveMode": true,
               "controlConfiguration": {
                 "@com.sap.vocabularies.UI.v1.LineItem": {
                   "tableSettings": {
                     "type": "ResponsiveTable"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "EnergyProjectsObjectPage": {
-          "type": "Component",
-          "id": "EnergyProjectsObjectPage",
-          "name": "sap.fe.templates.ObjectPage",
-          "options": {
-            "settings": {
-              "editableHeaderContent": false,
-              "contextPath": "/EnergyProjects",
-              "editMode": "Editable",
-              "controlConfiguration": {
-                "dcepProjects/@com.sap.vocabularies.UI.v1.LineItem": {
-                  "tableSettings": {
-                    "enablePaste": false
                   }
                 }
               }
@@ -144,6 +98,6 @@
   },
   "sap.fiori": {
     "registrationIds": [],
-    "archeType": "transactional"
+    "archeType": "analytical"
   }
 }

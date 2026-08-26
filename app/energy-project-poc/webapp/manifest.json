@@ -9,7 +9,6 @@
     },
     "title": "{{appTitle}}",
     "description": "{{appDescription}}",
-    "resources": "resources.json",
     "sourceTemplate": {
       "id": "@sap/generator-fiori:lrop",
       "version": "1.19.0",
@@ -137,6 +136,7 @@
             "settings": {
               "editableHeaderContent": false,
               "contextPath": "/EnergyProjects",
+              "openInEditMode": true,
               "controlConfiguration": {
                 "activePhases/@com.sap.vocabularies.UI.v1.LineItem": {
                   "actions": {

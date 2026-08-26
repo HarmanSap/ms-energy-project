@@ -3,12 +3,11 @@ sap.ui.define([
 ], function (ControllerExtension) {
     "use strict";
 
-    // POC-only: after Save, go back into edit mode so the page stays editable.
+    // after saving, jump straight back into edit mode
     return ControllerExtension.extend("energyprojectpoc.ext.ObjectPageExt", {
 
         override: {
             editFlow: {
-                // Save drops us back on the active doc, so re-open it for editing.
                 onAfterSave: function (mParameters) {
                     var oContext = mParameters && mParameters.context;
                     if (oContext) {
