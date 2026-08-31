@@ -16,13 +16,41 @@ annotate service.Phases with {
     );
 };
 
-// full dialog value help — omitting ValueListWithFixedValues gives the Search+Select dialog
+// dialog-style value help for Project Name (no ValueListWithFixedValues → popup with search + table)
+annotate service.DCEPProjects with {
+    name @(
+        Common.Label    : 'Project Name',
+        Common.ValueList: {
+            $Type         : 'Common.ValueListType',
+            CollectionPath: 'DCEPProjects',
+            Parameters    : [
+                {
+                    $Type            : 'Common.ValueListParameterOut',
+                    LocalDataProperty: name,
+                    ValueListProperty: 'name'
+                },
+                {
+                    $Type            : 'Common.ValueListParameterDisplayOnly',
+                    ValueListProperty: 'type'
+                },
+                {
+                    $Type            : 'Common.ValueListParameterOut',
+                    LocalDataProperty: phase_ID,
+                    ValueListProperty: 'phase_ID'
+                }
+            ]
+        }
+    );
+};
+
+// dropdown selection (ValueListWithFixedValues gives a simple select instead of the dialog)
 annotate service.DCEPProjects with {
     phase_ID @(
-        Common.Label          : 'Phase',
-        Common.Text           : phase.name,
-        Common.TextArrangement: #TextOnly,
-        Common.ValueList      : {
+        Common.Label                   : 'Phase',
+        Common.Text                    : phase.name,
+        Common.TextArrangement         : #TextOnly,
+        Common.ValueListWithFixedValues: true,
+        Common.ValueList               : {
             $Type         : 'Common.ValueListType',
             CollectionPath: 'Phases',
             Parameters    : [

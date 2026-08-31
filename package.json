@@ -26,7 +26,9 @@
       "ignore": [
         "**/*.log",
         "**/package-lock.json",
-        "**/.cds-services.json"
+        "**/.cds-services.json",
+        "app/*/webapp/**",
+        "app/*/node_modules/**"
       ]
     }
   },
