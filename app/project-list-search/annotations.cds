@@ -6,7 +6,27 @@ annotate service.DCEPProjects with @(
         { $Type: 'UI.DataField', Value: name,     Label: 'Project Name' },
         { $Type: 'UI.DataField', Value: type,     Label: 'Type'         },
         { $Type: 'UI.DataField', Value: phase_ID, Label: 'Phase'        }
-    ]
+    ],
+    UI.HeaderInfo: {
+        TypeName      : 'DCEP Project',
+        TypeNamePlural: 'DCEP Projects',
+        Title         : { Value: name },
+        Description   : { Value: type }
+    },
+    UI.Facets: [
+        {
+            $Type : 'UI.ReferenceFacet',
+            Label : 'Project Details',
+            Target: '@UI.FieldGroup#Details'
+        }
+    ],
+    UI.FieldGroup#Details: {
+        Data: [
+            { $Type: 'UI.DataField', Value: name,     Label: 'Project Name' },
+            { $Type: 'UI.DataField', Value: type,     Label: 'Type'         },
+            { $Type: 'UI.DataField', Value: phase_ID, Label: 'Phase'        }
+        ]
+    }
 );
 
 annotate service.Phases with {

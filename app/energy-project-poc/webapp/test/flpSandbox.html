@@ -1,0 +1,88 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Local FLP Sandbox</title>
+
+    <script type="text/javascript">
+        window["sap-ushell-config"] = {
+            defaultRenderer: "fiori2",
+            renderers: {
+                fiori2: {
+                    componentData: {
+                        config: {
+                            search: "hidden",
+                            enableSearch: false
+                        }
+                    }
+                }
+            },
+            services: {
+                Notifications: {
+                    config: {
+                        enabled: true,
+                        serviceUrl: "/api/notifications",
+                        pollingIntervalInSeconds: 10
+                    }
+                }
+            },
+            applications: {
+                "ProjectList-display": {
+                    additionalInformation: "SAPUI5.Component=projectlistsearch",
+                    applicationType: "URL",
+                    url: "../../projectlistsearch/",
+                    description: "Project List Search"
+                }
+            }
+        };
+    </script>
+
+    <script src="../test-resources/sap/ushell/bootstrap/sandbox.js" id="sap-ushell-bootstrap"></script>
+
+    <script id="sap-ui-bootstrap"
+        src="../resources/sap-ui-core.js"
+        data-sap-ui-libs="sap.m,sap.ushell,sap.fiori,sap.ui.layout,sap.f,sap.fe.templates"
+        data-sap-ui-async="true"
+        data-sap-ui-preload="async"
+        data-sap-ui-theme="sap_horizon"
+        data-sap-ui-compatVersion="edge"
+        data-sap-ui-language="en"
+        data-sap-ui-bindingSyntax="complex"
+        data-sap-ui-frameOptions="allow"
+        data-sap-ui-xx-componentPreload="off"
+        data-sap-ui-resourceroots='{"open.ux.preview.client": "../preview/client"}'
+        data-open-ux-preview-base-url=".."
+        data-sap-ui-oninit="module:open/ux/preview/client/flp/init">
+    </script>
+
+    <script>
+        sap.ui.getCore().attachInit(function () {
+            var oService = sap.ushell.Container.getService("AppState");
+            var oState = oService.createEmptyAppState();
+            oState.setData({
+                selectionVariant: JSON.stringify({
+                    SelectionVariantID: "SV_MULTI_NAME",
+                    SelectOptions: [{
+                        PropertyName: "name",
+                        Ranges: [
+                            { Sign: "I", Option: "EQ", Low: "Azure AI Insights Platform", High: "" },
+                            { Sign: "I", Option: "EQ", Low: "Smart Meter Analytics", High: "" }
+                        ]
+                    }]
+                })
+            });
+            var sKey = oState.getKey();
+            oState.save();
+            fetch("/api/notifications/appstate", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ notifId: "notif-dcep-003", key: sKey })
+            });
+        });
+    </script>
+</head>
+<body class="sapUiBody" id="content">
+</body>
+</html>

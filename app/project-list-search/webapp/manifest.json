@@ -18,6 +18,19 @@
           "odataVersion": "4.0"
         }
       }
+    },
+    "crossNavigation": {
+      "inbounds": {
+        "ProjectList-display": {
+          "semanticObject": "ProjectList",
+          "action": "display",
+          "title": "Project List Search",
+          "signature": {
+            "parameters": {},
+            "additionalParameters": "allowed"
+          }
+        }
+      }
     }
   },
   "sap.ui": {
@@ -70,6 +83,11 @@
           "pattern": ":?query:",
           "name": "DCEPProjectsList",
           "target": "DCEPProjectsList"
+        },
+        {
+          "pattern": "DCEPProjects({key}):?query:",
+          "name": "DCEPProjectsObjectPage",
+          "target": "DCEPProjectsObjectPage"
         }
       ],
       "targets": {
@@ -83,6 +101,13 @@
               "variantManagement": "Page",
               "initialLoad": "Enabled",
               "liveMode": true,
+              "navigation": {
+                "DCEPProjects": {
+                  "detail": {
+                    "route": "DCEPProjectsObjectPage"
+                  }
+                }
+              },
               "controlConfiguration": {
                 "@com.sap.vocabularies.UI.v1.LineItem": {
                   "tableSettings": {
@@ -90,6 +115,16 @@
                   }
                 }
               }
+            }
+          }
+        },
+        "DCEPProjectsObjectPage": {
+          "type": "Component",
+          "id": "DCEPProjectsObjectPage",
+          "name": "sap.fe.templates.ObjectPage",
+          "options": {
+            "settings": {
+              "contextPath": "/DCEPProjects"
             }
           }
         }
