@@ -6,8 +6,8 @@
   },
   "devDependencies": {
     "@cap-js/sqlite": "^2",
-    "concurrently": "^8",
-    "cds-plugin-ui5": "^0.13.0"
+    "cds-plugin-ui5": "^0.13.0",
+    "concurrently": "^8"
   },
   "scripts": {
     "start": "cds-serve",
@@ -38,6 +38,7 @@
   ],
   "sapux": [
     "app/energy-project-poc",
-    "app/project-list-search"
+    "app/project-list-search",
+    "app/sort-test"
   ]
 }
